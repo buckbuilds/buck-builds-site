@@ -1,3 +1,8 @@
 name = "buck-builds-site"
 compatibility_date = "2026-07-04"
 pages_build_output_dir = "."
+
+[[d1_databases]]
+binding = "DB"
+database_name = "buck_builds_requests"
+database_id = "8e9f8bbd-533c-4f7a-8581-e7a2812d6bce"
