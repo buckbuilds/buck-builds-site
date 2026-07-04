@@ -71,6 +71,15 @@
       "&body=" + encodeURIComponent(body);
   }
 
+  function canUseDynamicRequests() {
+    var host = window.location.hostname;
+    return /^https?:$/.test(window.location.protocol) && (
+      host === "buckbuilds.org" ||
+      host === "www.buckbuilds.org" ||
+      /\.pages\.dev$/i.test(host)
+    );
+  }
+
   if (requestForm) {
     requestForm.addEventListener("submit", function (event) {
       event.preventDefault();
@@ -82,7 +91,7 @@
       }
 
       var payload = requestPayload(requestForm);
-      var endpoint = requestForm.dataset.endpoint;
+      var endpoint = requestForm.dataset.endpoint || (canUseDynamicRequests() ? "/api/requests" : "");
       var mailto = requestForm.dataset.mailto;
 
       if (payload.company_site) {
@@ -188,7 +197,9 @@
   }
 
   if (jobBoard) {
-    fetch(jobBoard.dataset.boardSrc || "assets/request-board.json", {
+    var boardSrc = canUseDynamicRequests() ? "/api/request-board" : (jobBoard.dataset.boardSrc || "assets/request-board.json");
+
+    fetch(boardSrc, {
       cache: "no-store"
     }).then(function (response) {
       if (!response.ok) {
