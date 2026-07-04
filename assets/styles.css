@@ -78,8 +78,8 @@ a {
 }
 
 .nav-links {
-  gap: clamp(12px, 3vw, 30px);
-  font-size: 0.94rem;
+  gap: clamp(10px, 2vw, 24px);
+  font-size: 0.9rem;
   font-weight: 700;
 }
 
@@ -516,21 +516,27 @@ h3 {
 }
 
 .choice-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(112px, 1fr));
 }
 
 .choice-tile {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   min-height: 52px;
-  padding: 0 14px;
+  padding: 0 12px;
   border: 1px solid var(--line);
   border-radius: 8px;
   color: var(--ink-soft);
   background: var(--surface);
+  font-size: 0.94rem;
   font-weight: 850;
   cursor: pointer;
+}
+
+.choice-tile span {
+  min-width: 0;
+  white-space: nowrap;
 }
 
 .choice-tile:has(input:checked) {
@@ -540,6 +546,7 @@ h3 {
 }
 
 .choice-tile input {
+  flex: 0 0 auto;
   width: 18px;
   height: 18px;
   margin: 0;
